@@ -50,6 +50,7 @@ retrolambda {
 project.ext.support_version = '23.2.1'
 project.ext.retrofit_version = '2.0.2'
 project.ext.dagger_version = '2.4'
+project.ext.okhttp_version = '3.2.0'
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
@@ -66,7 +67,8 @@ dependencies {
     compile "com.squareup.retrofit2:converter-jackson:$retrofit_version"
     compile "com.squareup.retrofit2:adapter-rxjava:$retrofit_version"
 
-    compile 'com.squareup.okhttp3:okhttp:3.2.0'
+    compile "com.squareup.okhttp3:okhttp:$okhttp_version"
+    compile "com.squareup.okhttp3:logging-interceptor:$okhttp_version"
 
     compile "com.google.dagger:dagger:$dagger_version"
     apt "com.google.dagger:dagger-compiler:$dagger_version"

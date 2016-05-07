@@ -7,6 +7,7 @@ import javax.inject.Singleton;
 import dagger.Module;
 import dagger.Provides;
 import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.jackson.JacksonConverterFactory;
@@ -22,7 +23,7 @@ public class RestServicesModule {
 
         OkHttpClient okHttpClient = new OkHttpClient();
 
-        okHttpClient.interceptors().add(new RetrofitHelper.LoggingInterceptor());
+        okHttpClient.interceptors().add(new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY));
 
         Retrofit retrofit = new Retrofit.Builder().
                 client(okHttpClient).
