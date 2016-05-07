@@ -1,0 +1,10 @@
+apply plugin: 'com.android.application'
+
+android {
+
+    productFlavors {
+        herokuServerDev {
+            buildConfigField "String", "API_PATH", "\"https://mi-edificio-server.herokuapp.com\""
+        }
+    }
+}
