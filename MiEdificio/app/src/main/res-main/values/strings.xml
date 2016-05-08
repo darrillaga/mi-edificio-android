@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">MiEdificio</string>
+    <string name="loading">Loading…</string>
+    <string name="app_intro">MiEdificio te permite comunicarte con tus vecinos como tambien publicar y ver información de tu edificio.</string>
+    <string name="home_unite_a_tu_edificio">Unite a tu Edificio</string>
+    <string name="home_registra_tu_edificio">Registrá tu Edificio</string>
 </resources>
