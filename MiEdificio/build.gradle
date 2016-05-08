@@ -11,6 +11,10 @@ buildscript {
         classpath 'com.android.tools.build:gradle:2.1.0'
         classpath 'me.tatarka:gradle-retrolambda:3.2.5'
         classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
+        classpath('fr.avianey.androidsvgdrawable:gradle-plugin:3.0.0') {
+            // should be excluded to avoid conflict
+            exclude group: 'xerces'
+        }
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files

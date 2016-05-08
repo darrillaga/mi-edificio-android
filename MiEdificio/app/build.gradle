@@ -1,6 +1,8 @@
 apply plugin: 'com.android.application'
 apply plugin: 'me.tatarka.retrolambda'
 apply plugin: 'com.neenbedankt.android-apt'
+apply plugin: "androidsvgdrawable"
+
 apply from: 'api_config.gradle'
 
 android {
@@ -36,6 +38,7 @@ android {
         main {
             res.srcDirs = [
                     'src/main/res-main',
+                    'src/main/res-generated',
                     'src/main/res-screen/find-building'
             ]
         }
@@ -46,6 +49,8 @@ retrolambda {
     jdk System.getenv("JAVA8_HOME")
     defaultMethods true
 }
+
+
 
 project.ext.support_version = '23.2.1'
 project.ext.retrofit_version = '2.0.2'
@@ -78,4 +83,46 @@ dependencies {
     compile 'io.reactivex:rxjava:1.1.3'
     compile 'io.reactivex:rxandroid:1.1.0'
     compile 'com.trello:rxlifecycle:0.5.0'
+}
+
+
+// SVG Tasks
+
+// create a task to convert SVG to PNG MIPMAP
+task svgToMipmapPng(type: fr.avianey.androidsvgdrawable.gradle.SvgDrawableTask) {
+    // specify where to pick SVG from
+    from = files('src/main/svg-mipmap')
+    // specify the android res folder
+    to = file('src/main/res-generated/')
+    // create qualified directories if missing
+    createMissingDirectories = true
+    // override files only if necessary
+    overwriteMode = 'ifModified'
+    // let generate PNG for the following densities only
+    targetedDensities = ['ldpi', 'hdpi', 'mdpi', 'xhdpi', 'xxhdpi', 'xxxhdpi']
+    // output format of the generated resources
+    outputFormat = 'PNG'
+    // output type is mipmap
+    outputType = 'mipmap'
+}
+
+// create a task to convert SVG to PNG DRAWABLE
+task svgToDrawablePng(type: fr.avianey.androidsvgdrawable.gradle.SvgDrawableTask) {
+    // specify where to pick SVG from
+    from = files('src/main/svg-drawable')
+    // specify the android res folder
+    to = file('src/main/res-generated/')
+    // create qualified directories if missing
+    createMissingDirectories = true
+    // override files only if necessary
+    overwriteMode = 'ifModified'
+    // let generate PNG for the following densities only
+    // if none specified, all densities will be used
+    targetedDensities = ['ldpi', 'hdpi', 'mdpi', 'xhdpi', 'xxhdpi', 'xxxhdpi']
+    // relative path of the file specifying nine patch specs
+    ninePatchConfig = file('src/main/svg-drawable/9patch.json')
+    // output format of the generated resources
+    outputFormat = 'PNG'
+    // output type is drawable (default)
+    outputType = 'drawable'
 }
