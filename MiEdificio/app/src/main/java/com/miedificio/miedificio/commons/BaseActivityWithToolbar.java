@@ -1,18 +1,18 @@
 package com.miedificio.miedificio.commons;
 
+import android.databinding.DataBindingUtil;
+import android.databinding.ObservableBoolean;
+import android.databinding.ViewDataBinding;
 import android.os.Bundle;
 import android.support.annotation.CallSuper;
 import android.support.annotation.LayoutRes;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.FrameLayout;
-import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.miedificio.miedificio.R;
+import com.miedificio.miedificio.databinding.ActivityBaseBinding;
 
 
 /**
@@ -21,28 +21,26 @@ import com.miedificio.miedificio.R;
 public abstract class BaseActivityWithToolbar extends AppCompatActivity {
     private static final String TAG = BaseActivityWithToolbar.class.getSimpleName();
 
-    private FrameLayout mContentFL;
-    private RelativeLayout mLoadingRL;
     private int mLoadingCounter = 0;
+    private ActivityBaseBinding mBinding;
+
+    ObservableBoolean mLoading = new ObservableBoolean();
 
     @Override
     @CallSuper
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(getBaseActivityLayout());
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        mBinding = DataBindingUtil.setContentView(this, getBaseActivityLayout());
+
+        setSupportActionBar(mBinding.toolbar);
 
         if (isShowBackButton()) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setHomeButtonEnabled(true);
         }
 
-        mContentFL = (FrameLayout) findViewById(R.id.contentFL);
-        mLoadingRL = (RelativeLayout) findViewById(R.id.loadingRL);
-
-        View contentView = getLayoutInflater().inflate(getContentLayoutId(), mContentFL, false);
-        mContentFL.addView(contentView);
+        ViewDataBinding viewDataBinding = DataBindingUtil.inflate(getLayoutInflater(), getContentLayoutId(), mBinding.contentFL, false);
+        mBinding.contentFL.addView(viewDataBinding.getRoot());
     }
 
     protected int getBaseActivityLayout() {
@@ -55,7 +53,7 @@ public abstract class BaseActivityWithToolbar extends AppCompatActivity {
             public void run() {
                 mLoadingCounter++;
                 if (mLoadingCounter == 1) {
-                    mLoadingRL.setVisibility(View.VISIBLE);
+                    mLoading.set(true);
                 }
             }
         });
@@ -70,7 +68,7 @@ public abstract class BaseActivityWithToolbar extends AppCompatActivity {
                     mLoadingCounter = 0;
                 }
                 if (mLoadingCounter == 0) {
-                    mLoadingRL.setVisibility(View.GONE);
+                    mLoading.set(false);
                 }
             }
         });
