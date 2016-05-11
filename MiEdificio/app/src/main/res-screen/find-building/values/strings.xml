@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="insert_building_code">Inserta el código de tu edificio</string>
+    <string name="code">Código</string>
+    <string name="login">Ingresar</string>
+    <string name="read_qr">Leer QR</string>
+</resources>

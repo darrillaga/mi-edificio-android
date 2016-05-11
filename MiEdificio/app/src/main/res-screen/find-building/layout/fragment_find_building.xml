@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.miedificio.miedificio.findbuilding.viewmodel.FindBuildingViewModel"/>
+
+        <variable
+            name="eventsHandler"
+            type="com.miedificio.miedificio.findbuilding.view.FindBuildingEventsHandler"/>
+
+        <import type="android.text.TextUtils"/>
+    </data>
+
+    <FrameLayout
+        style="@style/Base.ContainerWithoutPadding">
+
+        <LinearLayout
+            style="@style/Base.Container"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/Base.Wrapper.FullWidth.FullPadded"
+                android:gravity="center_horizontal"
+                android:textColor="@color/black"
+                android:textSize="@dimen/large_text"
+                android:text="@string/insert_building_code"/>
+
+            <EditText
+                style="@style/Base.Wrapper.FullWidth.FullPadded"
+                android:gravity="center_horizontal"
+                android:hint="@string/code"
+                app:binding="@{viewModel.code}"/>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/medium_spacing"
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:padding="@dimen/medium_spacing"
+                android:text="@string/login"
+                android:enabled="@{!TextUtils.isEmpty(viewModel.code.get)}"
+                android:onClick="@{eventsHandler::onLoginAction}"/>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/medium_spacing"
+                style="@style/Widget.AppCompat.Button"
+                android:padding="@dimen/medium_spacing"
+                android:text="@string/read_qr"
+                android:onClick="@{eventsHandler::onScanCodeAction}"/>
+        </LinearLayout>
+
+        <FrameLayout
+            android:id="@+id/cameraReaderContainer"
+            style="@style/Base.ContainerWithoutPadding"/>
+
+    </FrameLayout>
+</layout>
