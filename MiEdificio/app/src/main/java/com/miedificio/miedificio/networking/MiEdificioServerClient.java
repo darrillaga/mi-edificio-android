@@ -39,6 +39,10 @@ public interface MiEdificioServerClient {
     @GET("buildings/{id}")
     Observable<Building> getBuilding(@Path("buildingId") long buildingId);
 
+    // Get Building
+    @GET("buildings/by-code/{code}")
+    Observable<Building> getBuildingByCode(@Path("code") String code);
+
     // Create Building
     @POST("buildings")
     Observable<Building> createBuilding(@Body com.miedificio.miedificio.networking.payload.Building building);

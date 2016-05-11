@@ -21,9 +21,9 @@ public class RestServicesModule {
     @Singleton
     MiEdificioServerClient provideServiceClient() {
 
-        OkHttpClient okHttpClient = new OkHttpClient();
-
-        okHttpClient.interceptors().add(new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY));
+        OkHttpClient okHttpClient = new OkHttpClient.Builder()
+                .addInterceptor(new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
+                .build();
 
         Retrofit retrofit = new Retrofit.Builder().
                 client(okHttpClient).
