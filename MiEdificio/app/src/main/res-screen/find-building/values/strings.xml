@@ -4,4 +4,17 @@
     <string name="code">Código</string>
     <string name="login">Ingresar</string>
     <string name="read_qr">Leer QR</string>
+
+    <string name="building_name_label">Te estás uniendo al edificio:</string>
+    <string name="address_and_value">Dirección: %1$s</string>
+    <string name="contact_email_and_value">Contacto: %1$s</string>
+    <string name="join_building_info">Sigue el proceso de ingreso para poder ver y postear en el muro de tu edificio</string>
+    <string name="insert_my_personal_info">Ingresar mis datos</string>
+
+    <string name="retry">Reintentar</string>
+
+    <string name="building_creation_info">Sigue las instrucciones que te envíamos por mail para que tus vecinos se puedan sumar.</string>
+    <string name="go_to_building">Ir a mi edificio</string>
+    <string name="neighbours_code_label">El código para los vecinos es:</string>
+    <string name="building_created_label">Tu edicicio %1$s ha sido creado!</string>
 </resources>

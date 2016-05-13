@@ -27,7 +27,7 @@ public interface MiEdificioServerClient {
 
     // Create building user
     @POST("buildings/{buildingId}/buildingUsers")
-    Observable<BuildingUser> createBuildingUser(@Body com.miedificio.miedificio.networking.payload.BuildingUser buildingUser);
+    Observable<BuildingUser> createBuildingUser(@Path("buildingId") Long buildingId, @Body com.miedificio.miedificio.networking.payload.BuildingUser buildingUser);
 
     // Buildings
 
@@ -37,7 +37,7 @@ public interface MiEdificioServerClient {
 
     // Get Building
     @GET("buildings/{id}")
-    Observable<Building> getBuilding(@Path("buildingId") long buildingId);
+    Observable<Building> getBuilding(@Path("id") long buildingId);
 
     // Get Building
     @GET("buildings/by-code/{code}")

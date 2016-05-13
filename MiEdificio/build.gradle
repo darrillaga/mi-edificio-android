@@ -6,6 +6,7 @@ buildscript {
         maven {
             url  "http://dl.bintray.com/darrillaga/maven"
         }
+        maven {url "https://clojars.org/repo/"}
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:2.1.0'
@@ -27,6 +28,7 @@ allprojects {
         maven {
             url  "http://dl.bintray.com/darrillaga/maven"
         }
+        maven {url "https://clojars.org/repo/"}
     }
 }
 

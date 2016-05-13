@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.miedificio.miedificio.createbuildinguser.viewmodel.CreateBuildingUserViewModel"/>
+
+        <variable
+            name="eventsHandler"
+            type="com.miedificio.miedificio.createbuildinguser.view.CreateBuildingUserEventsHandler"/>
+
+        <import type="android.view.View"/>
+    </data>
+
+    <FrameLayout
+        style="@style/Base.ContainerWithoutPadding">
+
+        <LinearLayout
+            style="@style/Base.Container"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/Base.Wrapper.FullWidth.FullPadded"
+                android:gravity="center_horizontal"
+                android:textColor="@color/black"
+                android:textSize="@dimen/large_text"
+                android:text="@string/insert_building_code"/>
+
+            <EditText
+                style="@style/Base.Wrapper.FullWidth.FullPadded"
+                android:hint="@string/name"
+                app:binding="@{viewModel.name}"/>
+
+            <EditText
+                style="@style/Base.Wrapper.FullWidth.FullPadded"
+                android:hint="@string/apartment"
+                app:binding="@{viewModel.apartment}"/>
+
+            <EditText
+                style="@style/Base.Wrapper.FullWidth.FullPadded"
+                android:hint="@string/roleDescription"
+                app:binding="@{viewModel.roleDescription}"/>
+
+            <TextView
+                android:layout_marginTop="@dimen/small_spacing"
+                style="@style/Base.Wrapper.FullWidth.FullPadded"
+                android:gravity="center_horizontal"
+                android:textColor="@color/black"
+                android:textSize="@dimen/small_text"
+                android:text="@string/join_building_info"/>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/medium_spacing"
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:padding="@dimen/medium_spacing"
+                android:text="@string/login"
+                android:onClick="@{eventsHandler::onCreateBuildingUserAction}"/>
+        </LinearLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clickable="true"
+            android:background="@color/transparent_black"
+            android:visibility="@{viewModel.creating ? View.VISIBLE : View.GONE}">
+
+            <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                style="@style/Widget.AppCompat.ProgressBar"/>
+        </FrameLayout>
+
+    </FrameLayout>
+</layout>

@@ -1,6 +1,7 @@
 package com.miedificio.miedificio.findbuilding.view;
 
 import android.Manifest;
+import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -14,6 +15,7 @@ import com.miedificio.miedificio.R;
 import com.miedificio.miedificio.databinding.FragmentFindBuildingBinding;
 import com.miedificio.miedificio.findbuilding.viewmodel.FindBuildingViewModel;
 import com.miedificio.miedificio.model.Building;
+import com.miedificio.miedificio.ui.ActivityFragmentsInteractionsHelper;
 import com.miedificio.miedificio.ui.ErrorsHandler;
 import com.miedificio.miedificio.ui.KeyboardUtils;
 import com.tbruyelle.rxpermissions.RxPermissions;
@@ -32,6 +34,15 @@ public class FindBuildingFragment extends NaviFragment
     private FragmentFindBuildingBinding mFragmentFindBuildingBinding;
     private FindBuildingViewModel mFindBuildingViewModel;
     private ErrorsHandler mErrorsHandler;
+    private Interactions mInteractions;
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        mInteractions = ActivityFragmentsInteractionsHelper
+                .ensureFragmentHasAttachedRequiredClassObject(this, Interactions.class);
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -64,7 +75,7 @@ public class FindBuildingFragment extends NaviFragment
     }
 
     private void goToBuilding(Building building) {
-        //TODO start info activity / set global current building
+        mInteractions.onBuildingFoundAction(building);
     }
 
     private void startCameraCodeReaderInLifecycle() {
@@ -106,5 +117,9 @@ public class FindBuildingFragment extends NaviFragment
         getFragmentManager().popBackStack();
         mFindBuildingViewModel.code.set(text);
         onLoginAction(null);
+    }
+
+    public interface Interactions {
+        void onBuildingFoundAction(Building building);
     }
 }

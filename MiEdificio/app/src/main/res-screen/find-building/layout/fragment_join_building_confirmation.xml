@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.miedificio.miedificio.findbuilding.viewmodel.BuildingViewModel"/>
+
+        <variable
+            name="eventsHandler"
+            type="com.miedificio.miedificio.findbuilding.view.JoinBuildingConfirmationEventsHandler"/>
+
+        <import type="android.view.View"/>
+    </data>
+
+    <FrameLayout
+        style="@style/Base.ContainerWithoutPadding">
+
+        <LinearLayout
+            style="@style/Base.Container"
+            android:orientation="vertical"
+            android:visibility="@{viewModel.error == null ? View.VISIBLE : View.GONE}">
+
+            <TextView
+                style="@style/Base.Wrapper.FullWidth.FullPadded"
+                android:gravity="center_horizontal"
+                android:textColor="@color/black"
+                android:textSize="@dimen/large_text"
+                android:text="@{@string/building_name_label}"
+                tools:text="Te estás uniendo al edificio:"/>
+
+            <TextView
+                style="@style/Base.Wrapper.FullWidth.FullPadded"
+                android:gravity="center_horizontal"
+                android:textColor="@color/black"
+                android:textSize="@dimen/xlarge_text"
+                android:text='@{viewModel.name ?? ""}'
+                tools:text="ABC"/>
+
+            <TextView
+                style="@style/Base.Wrapper.FullWidth.FullPadded"
+                android:gravity="center_horizontal"
+                android:textColor="@color/black"
+                android:textSize="@dimen/large_text"
+                android:text='@{@string/address_and_value(viewModel.address ?? "")}'
+                tools:text="Dirección: Av Juan Roberto 5421 esq la Bartola"/>
+
+            <TextView
+                style="@style/Base.Wrapper.FullWidth.FullPadded"
+                android:gravity="center_horizontal"
+                android:textColor="@color/black"
+                android:textSize="@dimen/large_text"
+                android:text='@{@string/contact_email_and_value(viewModel.contactEmail ?? "")}'
+                tools:text="Contacto: a@a.com"/>
+
+            <TextView
+                style="@style/Base.Wrapper.FullWidth.FullPadded"
+                android:gravity="center_horizontal"
+                android:textColor="@color/black"
+                android:textSize="@dimen/large_text"
+                android:text="@string/join_building_info"/>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/medium_spacing"
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:padding="@dimen/medium_spacing"
+                android:text="@string/insert_my_personal_info"
+                android:enabled="@{!viewModel.fetching}"
+                android:onClick="@{eventsHandler::onJoinBuildingAction}"/>
+
+        </LinearLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clickable="true"
+            android:background="@color/transparent_black"
+            android:visibility="@{viewModel.fetching ? View.VISIBLE : View.GONE}">
+
+            <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                style="@style/Widget.AppCompat.ProgressBar"/>
+        </FrameLayout>
+
+        <LinearLayout
+            android:layout_gravity="center"
+            style="@style/Base.Wrapper"
+            android:orientation="vertical"
+            android:visibility="@{viewModel.error != null ? View.VISIBLE : View.GONE}">
+
+            <TextView
+                style="@style/Base.Wrapper.FullWidth.FullPadded"
+                android:gravity="center_horizontal"
+                android:text="@{viewModel.error}"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/Widget.AppCompat.Button"
+                android:gravity="center_horizontal"
+                android:padding="@dimen/medium_spacing"
+                android:text="@string/retry"
+                android:onClick="@{eventsHandler::onRetryAction}"/>
+        </LinearLayout>
+    </FrameLayout>
+</layout>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.miedificio.miedificio.findbuilding.viewmodel.BuildingViewModel"/>
+
+        <variable
+            name="eventsHandler"
+            type="com.miedificio.miedificio.findbuilding.view.CreateBuildingConfirmationEventsHandler"/>
+
+        <import type="android.view.View"/>
+    </data>
+
+    <LinearLayout
+        style="@style/Base.Container"
+        android:orientation="vertical"
+        android:visibility="@{viewModel.error == null ? View.VISIBLE : View.GONE}">
+
+        <TextView
+            style="@style/Base.Wrapper.FullWidth.FullPadded"
+            android:gravity="center_horizontal"
+            android:textColor="@color/black"
+            android:textSize="@dimen/large_text"
+            android:text="@{@string/building_created_label(viewModel.name)}"
+            tools:text="Tu edicicio MVD ha sido creado!"/>
+
+        <TextView
+            android:layout_marginTop="@dimen/medium_spacing"
+            style="@style/Base.Wrapper.FullWidth.FullPadded"
+            android:gravity="center_horizontal"
+            android:textColor="@color/black"
+            android:textSize="@dimen/large_text"
+            android:text="@string/neighbours_code_label"/>
+
+        <TextView
+            style="@style/Base.Wrapper.FullWidth.FullPadded"
+            android:gravity="center_horizontal"
+            android:textColor="@color/black"
+            android:textSize="@dimen/xxlarge_text"
+            android:text='@{viewModel.code ?? ""}'
+            tools:text="JD43344J"/>
+
+        <TextView
+            android:layout_marginTop="@dimen/medium_spacing"
+            style="@style/Base.Wrapper.FullWidth.FullPadded"
+            android:gravity="center_horizontal"
+            android:textColor="@color/black"
+            android:textSize="@dimen/medium_text"
+            android:text="@string/building_creation_info"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/medium_spacing"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:padding="@dimen/medium_spacing"
+            android:text="@string/go_to_building"
+            android:onClick="@{eventsHandler::onGoToMyBuildingAction}"/>
+
+    </LinearLayout>
+</layout>

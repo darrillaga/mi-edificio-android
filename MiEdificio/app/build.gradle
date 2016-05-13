@@ -39,7 +39,8 @@ android {
             res.srcDirs = [
                     'src/main/res-main',
                     'src/main/res-generated',
-                    'src/main/res-screen/find-building'
+                    'src/main/res-screen/find-building',
+                    'src/main/res-screen/create-building-user'
             ]
         }
     }
@@ -90,6 +91,15 @@ dependencies {
     compile 'com.trello:navi:0.2.0'
 
     compile 'me.dm7.barcodescanner:zxing:1.8.2'
+
+    compile 'com.hannesdorfmann.fragmentargs:annotation:3.0.2'
+    apt 'com.hannesdorfmann.fragmentargs:processor:3.0.2'
+
+    compile 'frankiesardo:icepick:3.2.0'
+    provided 'frankiesardo:icepick-processor:3.2.0'
+
+    compile 'se.emilsjolander:intentbuilder-api:0.14.0'
+    apt 'se.emilsjolander:intentbuilder-compiler:0.14.0'
 }
 
 
