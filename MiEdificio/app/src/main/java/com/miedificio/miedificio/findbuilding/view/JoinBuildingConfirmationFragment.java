@@ -14,7 +14,7 @@ import com.hannesdorfmann.fragmentargs.annotation.FragmentWithArgs;
 import com.miedificio.miedificio.Application;
 import com.miedificio.miedificio.R;
 import com.miedificio.miedificio.databinding.FragmentJoinBuildingConfirmationBinding;
-import com.miedificio.miedificio.findbuilding.viewmodel.BuildingViewModel;
+import com.miedificio.miedificio.viewmodel.BuildingViewModel;
 import com.miedificio.miedificio.ui.ActivityFragmentsInteractionsHelper;
 import com.miedificio.miedificio.ui.ErrorsHandler;
 import com.trello.navi.Event;

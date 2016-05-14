@@ -6,11 +6,11 @@
     <data>
         <variable
             name="viewModel"
-            type="com.miedificio.miedificio.findbuilding.viewmodel.BuildingViewModel"/>
+            type="com.miedificio.miedificio.viewmodel.BuildingViewModel"/>
 
         <variable
             name="eventsHandler"
-            type="com.miedificio.miedificio.findbuilding.view.CreateBuildingConfirmationEventsHandler"/>
+            type="com.miedificio.miedificio.createbuilding.view.CreateBuildingConfirmationEventsHandler"/>
 
         <import type="android.view.View"/>
     </data>

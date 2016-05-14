@@ -1,4 +1,4 @@
-package com.miedificio.miedificio.findbuilding.viewmodel;
+package com.miedificio.miedificio.viewmodel;
 
 import android.databinding.BaseObservable;
 import android.databinding.ObservableBoolean;

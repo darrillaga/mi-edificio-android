@@ -22,7 +22,6 @@ import icepick.State;
 public class JoinBuildingFlowFragment extends NaviFragment
         implements FindBuildingFragment.Interactions,
         JoinBuildingConfirmationFragment.Interactions,
-        CreateBuildingConfirmationFragment.Interactions,
         CreateBuildingUserFragment.Interactions {
 
     @State
@@ -110,35 +109,15 @@ public class JoinBuildingFlowFragment extends NaviFragment
                 .commit();
     }
 
-    private void attachCreateBuildingConfirmation() {
-        if (getFragmentManager().findFragmentByTag(CreateBuildingConfirmationFragment.class.getName()) != null) {
-            return;
-        }
-
-        Fragment fragment = new CreateBuildingConfirmationFragmentBuilder(buildingId).build();
-
-        fragment.setTargetFragment(this, 0);
-
-        getFragmentManager().beginTransaction()
-                .replace(R.id.fragmentsContainer, fragment, CreateBuildingConfirmationFragment.class.getName())
-                .addToBackStack(CreateBuildingConfirmationFragment.class.getName())
-                .commit();
-    }
-
     @Override
     public void onBuildingFoundAction(Building building) {
         attachJoinBuildingConfirmation(building);
     }
 
     @Override
-    public void onGoToMyBuildingAction(Long buildingId) {
-        mInteractions.onBuildingJoinFlowCompleted(buildingId, buildingUserId);
-    }
-
-    @Override
     public void onBuildingUserCreated(Long buildingUserId) {
         this.buildingUserId = buildingUserId;
-        attachCreateBuildingConfirmation();
+        mInteractions.onBuildingJoinFlowCompleted(buildingId, buildingUserId);
     }
 
     public interface Interactions {

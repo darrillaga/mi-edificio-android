@@ -1,4 +1,4 @@
-package com.miedificio.miedificio.findbuilding.view;
+package com.miedificio.miedificio.createbuilding.view;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -12,7 +12,7 @@ import com.hannesdorfmann.fragmentargs.annotation.Arg;
 import com.hannesdorfmann.fragmentargs.annotation.FragmentWithArgs;
 import com.miedificio.miedificio.Application;
 import com.miedificio.miedificio.databinding.FragmentBuildingCreateConfirmationBinding;
-import com.miedificio.miedificio.findbuilding.viewmodel.BuildingViewModel;
+import com.miedificio.miedificio.viewmodel.BuildingViewModel;
 import com.miedificio.miedificio.ui.ActivityFragmentsInteractionsHelper;
 import com.miedificio.miedificio.ui.ErrorsHandler;
 import com.trello.navi.Event;

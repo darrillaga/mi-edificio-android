@@ -1,4 +1,4 @@
-package com.miedificio.miedificio.findbuilding.view;
+package com.miedificio.miedificio.createbuilding.view;
 
 import android.view.View;
 
