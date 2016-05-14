@@ -10,7 +10,7 @@ import se.emilsjolander.intentbuilder.Extra;
 import se.emilsjolander.intentbuilder.IntentBuilder;
 
 @IntentBuilder
-public class BuildingWallActivity extends AppCompatActivity {
+public class BuildingWallActivity extends AppCompatActivity implements BuildingWallFragment.Interactions {
 
     @Extra
     Long buildingId;
