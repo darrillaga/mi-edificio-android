@@ -9,13 +9,21 @@ import android.view.ViewGroup;
 
 import com.hannesdorfmann.fragmentargs.annotation.Arg;
 import com.hannesdorfmann.fragmentargs.annotation.FragmentWithArgs;
+import com.miedificio.miedificio.Application;
+import com.miedificio.miedificio.ApplicationComponent;
+import com.miedificio.miedificio.buildingwall.viewmodel.CreatePostViewModel;
 import com.miedificio.miedificio.buildingwall.viewmodel.PostsViewModel;
 import com.miedificio.miedificio.databinding.FragmentBuildingWallBinding;
 import com.miedificio.miedificio.ui.ActivityFragmentsInteractionsHelper;
+import com.miedificio.miedificio.ui.ErrorsHandler;
 import com.trello.navi.component.support.NaviFragment;
+import com.trello.rxlifecycle.FragmentLifecycleProvider;
+import com.trello.rxlifecycle.navi.NaviLifecycle;
+
+import rx.functions.Actions;
 
 @FragmentWithArgs
-public class BuildingWallFragment extends NaviFragment {
+public class BuildingWallFragment extends NaviFragment implements CreatePostEventsHandler {
 
     @Arg
     Long buildingId;
@@ -23,8 +31,14 @@ public class BuildingWallFragment extends NaviFragment {
     @Arg
     Long buildingUserId;
 
+    private FragmentLifecycleProvider mFragmentLifecycleProvider = NaviLifecycle.createFragmentLifecycleProvider(this);
+
     private FragmentBuildingWallBinding mFragmentBuildingWallBinding;
+
     private PostsViewModel mPostsViewModel;
+    private CreatePostViewModel mCreatePostViewModel;
+
+    private ErrorsHandler mErrorsHandler;
 
     private Interactions mInteractions;
 
@@ -36,12 +50,32 @@ public class BuildingWallFragment extends NaviFragment {
 
         mInteractions = ActivityFragmentsInteractionsHelper.
                 ensureFragmentHasAttachedRequiredClassObject(this, Interactions.class);
+
+        mErrorsHandler = new ErrorsHandler(context);
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mPostsViewModel = new PostsViewModel();
+
+        mPostsViewModel = new PostsViewModel(buildingId);
+        mCreatePostViewModel = new CreatePostViewModel(buildingId, buildingUserId);
+
+        ApplicationComponent applicationComponent = Application.get(getContext()).getComponent();
+        applicationComponent.inject(mPostsViewModel);
+        applicationComponent.inject(mCreatePostViewModel);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        mPostsViewModel.fetchPosts()
+                .compose(mFragmentLifecycleProvider.bindToLifecycle())
+                .subscribe(
+                        Actions.empty(),
+                        mErrorsHandler::handle
+                );
     }
 
     @Nullable
@@ -51,8 +85,20 @@ public class BuildingWallFragment extends NaviFragment {
                 .inflate(inflater, container, false);
 
         mFragmentBuildingWallBinding.setViewModel(mPostsViewModel);
+        mFragmentBuildingWallBinding.setCreateViewModel(mCreatePostViewModel);
+        mFragmentBuildingWallBinding.setCreateEventsHandler(this);
 
         return mFragmentBuildingWallBinding.getRoot();
+    }
+
+    @Override
+    public void onCreatePostAction(View view) {
+        mCreatePostViewModel.create()
+                .compose(mFragmentLifecycleProvider.bindToLifecycle())
+                .subscribe(
+                        mPostsViewModel::addPost,
+                        mErrorsHandler::handle
+                );
     }
 
     public interface Interactions {

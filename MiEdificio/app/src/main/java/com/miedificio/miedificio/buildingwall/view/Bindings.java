@@ -22,9 +22,11 @@ public class Bindings {
             return;
         }
 
-        recyclerView.setLayoutManager(
-                new LinearLayoutManager(recyclerView.getContext(), LinearLayoutManager.VERTICAL, false)
-        );
+        LinearLayoutManager layoutManager = new LinearLayoutManager(recyclerView.getContext(), LinearLayoutManager.VERTICAL, false);
+
+        layoutManager.setAutoMeasureEnabled(true);
+
+        recyclerView.setLayoutManager(layoutManager);
 
         recyclerView.setAdapter(
                 DataBindingAdapterUtils.createAdapter(

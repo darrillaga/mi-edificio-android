@@ -8,6 +8,14 @@
             name="viewModel"
             type="com.miedificio.miedificio.buildingwall.viewmodel.PostsViewModel"/>
 
+        <variable
+            name="createViewModel"
+            type="com.miedificio.miedificio.buildingwall.viewmodel.CreatePostViewModel"/>
+
+        <variable
+            name="createEventsHandler"
+            type="com.miedificio.miedificio.buildingwall.view.CreatePostEventsHandler"/>
+
         <import type="android.support.v7.widget.LinearLayoutManager"/>
     </data>
 
@@ -19,25 +27,32 @@
             style="@style/Base.ContainerWithoutPadding"
             android:fillViewport="true">
 
-            <LinearLayout
+            <RelativeLayout
                 style="@style/Base.ContainerWithoutPadding"
                 android:orientation="vertical">
 
-                <include layout="@layout/layout_create_post"/>
+                <include
+                    android:id="@+id/createPostLayout"
+                    layout="@layout/layout_create_post"
+                    app:viewModel="@{createViewModel}"
+                    app:eventsHandler="@{createEventsHandler}"/>
 
                 <View
+                    android:id="@+id/createPostLayoutListDivider"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="@dimen/unity"
+                    android:layout_below="@+id/createPostLayout"
                     android:background="@drawable/dw_transparent_divider"/>
 
                 <android.support.v7.widget.RecyclerView
-                    style="@style/Base.ContainerWithoutPadding"
+                    android:layout_below="@+id/createPostLayoutListDivider"
+                    style="@style/Base.Wrapper.FullWidth"
                     app:dividerDrawable="@{@drawable/dw_transparent_divider}"
                     app:dividerDirection="@{LinearLayoutManager.VERTICAL}"
                     app:dataSet="@{viewModel.postViewModelList}">
 
                 </android.support.v7.widget.RecyclerView>
-            </LinearLayout>
+            </RelativeLayout>
         </android.support.v4.widget.NestedScrollView>
 
     </android.support.design.widget.CoordinatorLayout>

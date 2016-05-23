@@ -5,4 +5,5 @@
     <item name="onSwipeRefresh" type="id"/>
     <item name="onClickSubscribe" type="id"/>
     <item name="dividerAdded" type="id"/>
+    <item name="selectableItemBackground" type="id"/>
 </resources>

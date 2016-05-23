@@ -4,11 +4,15 @@ android {
 
     productFlavors {
         localServerDev {
-            buildConfigField "String", "API_PATH", "\"http://192.168.1.42:8080\""
+            buildConfigField "String", "API_PATH", "\"http://192.168.1.42:3000\""
         }
 
-        herokuServerDev {
-            buildConfigField "String", "API_PATH", "\"https://mi-edificio-server.herokuapp.com\""
+        herokuServerStaging {
+            buildConfigField "String", "API_PATH", "\"https://mi-edificio-server-staging.herokuapp.com\""
+        }
+
+        herokuServerProd {
+            buildConfigField "String", "API_PATH", "\"https://mi-edificio-server-ruby.herokuapp.com\""
         }
     }
 }

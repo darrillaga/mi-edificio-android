@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="create_post_hint">Crea un post</string>
+    <string name="create">Create</string>
+    <string name="usernameTag">-- %1$s</string>
 </resources>
