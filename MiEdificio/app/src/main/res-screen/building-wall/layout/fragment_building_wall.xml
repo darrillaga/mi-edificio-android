@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.miedificio.miedificio.buildingwall.viewmodel.PostsViewModel"/>
+
+        <variable
+            name="createViewModel"
+            type="com.miedificio.miedificio.buildingwall.viewmodel.CreatePostViewModel"/>
+
+        <variable
+            name="createEventsHandler"
+            type="com.miedificio.miedificio.buildingwall.view.CreatePostEventsHandler"/>
+
+        <import type="android.support.v7.widget.LinearLayoutManager"/>
+    </data>
+
+    <android.support.design.widget.CoordinatorLayout
+        style="@style/Base.ContainerWithoutPadding"
+        android:fitsSystemWindows="true">
+
+        <android.support.v4.widget.NestedScrollView
+            style="@style/Base.ContainerWithoutPadding"
+            android:fillViewport="true">
+
+            <RelativeLayout
+                style="@style/Base.ContainerWithoutPadding"
+                android:orientation="vertical">
+
+                <include
+                    android:id="@+id/createPostLayout"
+                    layout="@layout/layout_create_post"
+                    app:viewModel="@{createViewModel}"
+                    app:eventsHandler="@{createEventsHandler}"/>
+
+                <View
+                    android:id="@+id/createPostLayoutListDivider"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/unity"
+                    android:layout_below="@+id/createPostLayout"
+                    android:background="@drawable/dw_transparent_divider"/>
+
+                <android.support.v7.widget.RecyclerView
+                    android:layout_below="@+id/createPostLayoutListDivider"
+                    style="@style/Base.Wrapper.FullWidth"
+                    app:dividerDrawable="@{@drawable/dw_transparent_divider}"
+                    app:dividerDirection="@{LinearLayoutManager.VERTICAL}"
+                    app:dataSet="@{viewModel.postViewModelList}">
+
+                </android.support.v7.widget.RecyclerView>
+            </RelativeLayout>
+        </android.support.v4.widget.NestedScrollView>
+
+    </android.support.design.widget.CoordinatorLayout>
+</layout>

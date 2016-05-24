@@ -22,12 +22,15 @@ public interface MiEdificioServerClient {
     // BuildingUsers
 
     // Get building users
-    @GET("buildings/{buildingId}/buildingUsers")
+    @GET("buildings/{buildingId}/users")
     Observable<List<BuildingUser>> getBuildingsUsers(@Path("buildingId") long buildingId);
 
     // Create building user
-    @POST("buildings/{buildingId}/buildingUsers")
-    Observable<BuildingUser> createBuildingUser(@Path("buildingId") Long buildingId, @Body com.miedificio.miedificio.networking.payload.BuildingUser buildingUser);
+    @POST("buildings/{buildingId}/users")
+    Observable<BuildingUser> createBuildingUser(
+            @Path("buildingId") Long buildingId,
+            @Body com.miedificio.miedificio.networking.payload.BuildingUser buildingUser
+    );
 
     // Buildings
 
@@ -45,11 +48,16 @@ public interface MiEdificioServerClient {
 
     // Create Building
     @POST("buildings")
-    Observable<Building> createBuilding(@Body com.miedificio.miedificio.networking.payload.Building building);
+    Observable<Building> createBuilding(
+            @Body com.miedificio.miedificio.networking.payload.Building building
+    );
 
     // Update Building
     @PUT("buildings/{id}")
-    Observable<Building> updateBuilding(@Path("id") long id, @Body com.miedificio.miedificio.networking.payload.Building building);
+    Observable<Building> updateBuilding(
+            @Path("id") long id,
+            @Body com.miedificio.miedificio.networking.payload.Building building
+    );
 
     // Delete Building
     @DELETE("buildings/{id}")
@@ -59,21 +67,33 @@ public interface MiEdificioServerClient {
 
     // Get comments
     @GET("buildings/{buildingId}/posts/{postId}/comments")
-    Observable<List<Comment>> getBuildingPostComments(@Path("buildingId") long buildingId, @Path("postId") long postId);
+    Observable<List<Comment>> getBuildingPostComments(
+            @Path("buildingId") long buildingId,
+            @Path("postId") long postId
+    );
 
     // Create comment
-    @POST("buildings/{buildingId}/posts/{postId}/comments")
-    Observable<Comment> createBuildingPostComments(@Path("buildingId") long buildingId, @Path("postId") long postId, @Body com.miedificio.miedificio.networking.payload.Comment comment);
+    @POST("buildings/{buildingId}}/posts/{postId}/comments")
+    Observable<Comment> createBuildingPostComment(
+            @Path("buildingId") long buildingId,
+            @Path("postId") long postId,
+            @Body com.miedificio.miedificio.networking.payload.Comment comment
+    );
 
     // Posts
 
     // Get posts
     @GET("buildings/{buildingId}/posts")
-    Observable<List<Post>> getBuildingPosts(@Path("buildingId") long buildingId);
+    Observable<List<Post>> getBuildingPosts(
+            @Path("buildingId") long buildingId
+    );
 
     //Create post
     @POST("buildings/{buildingId}/posts")
-    Observable<List<Post>> createBuildingPosts(@Path("buildingId") long buildingId, @Body com.miedificio.miedificio.networking.payload.Post post);
+    Observable<Post> createBuildingPost(
+            @Path("buildingId") long buildingId,
+            @Body com.miedificio.miedificio.networking.payload.Post post
+    );
 
 
 }
