@@ -7,7 +7,7 @@ apply from: 'api_config.gradle'
 
 android {
     compileSdkVersion 23
-    buildToolsVersion "23.0.2"
+    buildToolsVersion '24'
 
     defaultConfig {
         applicationId "com.miedificio.miedificio"

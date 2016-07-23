@@ -7,6 +7,7 @@ import com.miedificio.miedificio.model.Post;
 
 import java.util.List;
 
+import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
@@ -37,6 +38,9 @@ public interface MiEdificioServerClient {
     // Get Buildings
     @GET("buildings")
     Observable<List<Building>> getBuildings();
+
+    @GET("buildings")
+    Call<List<Building>> getBuildingsCall();
 
     // Get Building
     @GET("buildings/{id}")
